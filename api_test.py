@@ -1,10 +1,14 @@
 import os
 from openai import OpenAI
 
-API_KEY = "<YOUR API KEY>"
+# Read API Key 
+with open("../openai_api.txt", "r") as f: 
+    api_key = f.readline()
+    f.close()
+
 MODEL = "gpt-3.5-turbo"
 
-client = OpenAI(api_key=API_KEY)
+client = OpenAI(api_key=api_key)
 
 chat_completion = client.chat.completions.create(
     messages=[
