@@ -1,2 +1,12 @@
+# API keys 
 openai_api.txt
+
+# Database files 
 vector_store/
+
+# python activation files
+__pycache__/
+
+# chainlit files 
+.chainlit/
+chainlit.md
