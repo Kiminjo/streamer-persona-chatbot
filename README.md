@@ -64,7 +64,7 @@ control + c (in terminal)
 ## Error 발생 시 해결 방법 
 ```
 ERROR: [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
-
+```
 
 - 원인: chainlit 접속에 필요한 8000번 포트를 이미 사용 중인 경우 발생하는 에러 
 
