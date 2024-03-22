@@ -4,6 +4,7 @@
 
 ![example_image](image/example.png)
 
+<br>
 
 ### 실행 방법 
 1. requirement 설치 
@@ -21,6 +22,7 @@ chainlit run main.py
 ```
 control + c (in terminal)
 ```
+<br>
 
 ## Error 발생 시 해결 방법 
 ```
@@ -41,6 +43,8 @@ kill $PID
 
 kill -9 $PID  //to forcefully kill the port
 ```
+
+<br>
 
 ## 개발 계획 
 - [x] 채팅 GUI 추가
