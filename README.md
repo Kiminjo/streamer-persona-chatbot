@@ -1,5 +1,6 @@
 # StreamAssist-Bot
 
+
 본 레포지토리는 스트리머의 개인정보에 대한 답변을 대신 해주는 챗봇을 만드는 프로젝트입니다. 
 
 인터넷 개인 방송은 스트리머와 시청자가 실시간 쌍방향 소통하는 플랫폼입니다. 실시간 쌍방향 소통은 기존 방송 시스템과 차별화 되는 인터넷 방송만의 특징으로 이러한 점으로 인해 여러 장단이 생기게 됩니다. 
@@ -48,11 +49,13 @@ python constuct_db.py
 
 
 4. 채팅 화면 접속 
+
 ```
 chainlit run main.py
 ```
 
 5. 실행 종료 
+
 ```
 control + c (in terminal)
 ```
@@ -61,7 +64,7 @@ control + c (in terminal)
 ## Error 발생 시 해결 방법 
 ```
 ERROR: [Errno 48] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
-```
+
 
 - 원인: chainlit 접속에 필요한 8000번 포트를 이미 사용 중인 경우 발생하는 에러 
 
@@ -90,3 +93,4 @@ kill -9 $PID  //to forcefully kill the port
 - [ ] 데이터 증강 기능 추가 
 - [ ] 답변 말투 변경 
 - [ ] 추론용 API 서버 구축 
+
