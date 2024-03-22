@@ -28,11 +28,11 @@
 1. 환경 만들기
 ```
 conda create -n assist_bot python=3.10.9
+conda activate assist_bot
 ```
 
 이 버전은 파이썬 3.10 버전을 필요로 합니다.    
 그 이하 버전의 파이썬 사용 시, 특정 기능에 제한이 있을 수 있습니다. 
-
 
 2. requirement 설치 
 
@@ -40,21 +40,28 @@ conda create -n assist_bot python=3.10.9
 pip install -r requirements.txt
 ```
 
-3. 스트리머 정보 구축 
+3. FAQ 작성 
 ```
-python constuct_db.py
+streamlit run qa_setting.py
+```
+최대 10개의 질문까지 설정 가능하며, 작성 후 하단의 '저장하기' 버튼을 누르면 txt 파일 형태로 저장됩니다. 
+
+
+4. 스트리머 정보 구축 
+```
+python construct_db.py
 ```
 
 위 코드를 실행하면 스트리머의 정보를 담은 vectore DB가 생성됩니다. 
 
 
-4. 채팅 화면 접속 
+5. 채팅 화면 접속 
 
 ```
 chainlit run main.py
 ```
 
-5. 실행 종료 
+6. 실행 종료 
 
 ```
 control + c (in terminal)
