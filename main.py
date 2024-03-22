@@ -4,6 +4,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 
 import chainlit as cl 
+from typing import Union
 
 # Custom functions
 from preprocessing import get_api_key
@@ -44,7 +45,9 @@ async def on_chat_start():
     await cl.Message(content="준비되었습니다. 메시지를 입력하세요.").send()
 
 @cl.on_message
-async def on_message(prompt: str):
+async def on_message(prompt: Union[str, cl.Message]):
+    if isinstance(prompt, cl.Message):
+        prompt = prompt.content
     print(f"입력된 메시지: {prompt}")
     result = chatbot(prompt)
     answer = result["result"]
