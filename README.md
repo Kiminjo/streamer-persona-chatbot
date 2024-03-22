@@ -2,7 +2,7 @@
 
 본 레포지토리는 스트리머의 개인정보에 대한 답변을 대신 해주는 챗봇을 만드는 프로젝트입니다.
 
-![example_image]("image/example.png")
+![example_image](image/example.png)
 
 
 ### 실행 방법 
