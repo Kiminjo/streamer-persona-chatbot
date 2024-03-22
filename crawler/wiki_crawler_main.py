@@ -66,7 +66,7 @@ for url in url_list:
     
 
     #ToTxtFile
-    file_name = 'wiki_text.txt'
+    file_name = '../data/wiki_text.txt'
     with open(file_name, 'a', encoding='utf-8') as file:
         file.write('\n'.join(table_list+wiki_text_list))
 
