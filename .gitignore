@@ -6,6 +6,7 @@ vector_store/
 
 # python activation files
 __pycache__/
+.DS_Store
 
 # chainlit files 
 .chainlit/
