@@ -95,7 +95,7 @@ kill -9 $PID  //to forcefully kill the port
 ## 개발 계획 
 - [x] 채팅 GUI 추가
 - [x] requirements 추가 
-- [ ] 커스텀 데이터 입력 GUI 화면 추가 
+- [x] 커스텀 데이터 입력 GUI 화면 추가 
 - [ ] 학습용 데이터 DB화 
 - [ ] 데이터 증강 기능 추가 
 - [ ] 답변 말투 변경 
