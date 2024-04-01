@@ -6,3 +6,4 @@ langchain-openai
 pysocks==1.7.1
 pytest-subtests==0.11.0
 streamlit
+pandas
