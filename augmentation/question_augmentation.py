@@ -5,10 +5,13 @@ from langchain.prompts import PromptTemplate
 import pandas as pd
 from pathlib import Path 
 from typing import Union, List
-from tqdm import tqdm
+from time import time, sleep
+import os 
 import re
 
-from prompts import template1
+os.chdir(str(Path(__file__).parent.parent))
+
+from prompts import *
 
 def get_data(src: Union[str, Path]) -> List[List]:
     df = pd.read_csv(src)
@@ -44,13 +47,11 @@ def sentence_cleaning(sentence: str) -> List:
 
 def main():
     # Get data and API key source 
-    # data_src = "../data/raw_data.csv"
-    # api_src = "../openai_api.txt"
     data_src = "data/test_data.csv"
     api_src = "openai_api.txt"
 
     # Set template 
-    template = template1
+    template = template2
 
     # Get data and API key
     questions, answers = get_data(data_src)
@@ -62,7 +63,11 @@ def main():
     # Get augmented questions
     augmented_questions = []
     for q, a in zip(questions, answers):
+        start_time = time()
         augmented_questions.append(get_answer(llm_chain, q, a))
+        print(f"Question: {q}")
+        print(f"Time taken: {time() - start_time:.2f}s")
+        sleep(30)
     print("here")
 
 if __name__ == "__main__":
