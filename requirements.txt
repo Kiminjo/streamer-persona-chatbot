@@ -1,0 +1,9 @@
+chainlit
+colorama==0.4.6
+faiss-cpu==1.8.0
+langchain==0.1.10
+langchain-openai
+pysocks==1.7.1
+pytest-subtests==0.11.0
+streamlit
+pandas
