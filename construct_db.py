@@ -1,6 +1,7 @@
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
+import os 
 from typing import Union
 from pathlib import Path 
 import warnings
@@ -26,7 +27,7 @@ def preprocessing(doc_src: Union[str, Path],
                           chunk_overlap=chunk_overlap)
 
     # Get the API key for the OpenAI model
-    api_key = get_api_key(api_src)
+    api_key = os.environ.get("OPENAI_API_KEY")
 
     return document, api_key
 

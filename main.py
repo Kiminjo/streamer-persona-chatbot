@@ -5,9 +5,7 @@ from langchain_openai import OpenAIEmbeddings
 
 import chainlit as cl 
 from typing import Union
-
-# Custom functions
-from preprocessing import get_api_key
+import os 
 
 def get_vector_store(db_path: str, 
                      api_key: str):
@@ -17,12 +15,10 @@ def get_vector_store(db_path: str,
                           allow_dangerous_deserialization=True)
     return db 
 
-
 db_path = "vector_store/"
-api_src = "openai_api.txt"
 
 # Get the API key for the OpenAI model
-api_key = get_api_key(api_src)
+api_key = os.environ.get("OPENAI_API_KEY")
 
 # Load the vector store
 db = get_vector_store(db_path, api_key)
