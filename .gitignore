@@ -1,9 +1,3 @@
-# API keys 
-openai_api.txt
-
-# Database files 
-vector_store/
-
 # python activation files
 __pycache__/
 .DS_Store
