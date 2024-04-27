@@ -17,7 +17,3 @@ def text_split(text: list[str],
                                      separator=separator,
                                      chunk_overlap=chunk_overlap)
     return splitter.split_documents(text)
-
-def get_api_key(src: Union[str, Path]):
-    with open(src, 'r') as f:
-        return f.read()
