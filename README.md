@@ -10,7 +10,7 @@
 <br>
 
 ## 실행 예시 
-![qa](image/qa.png)
+![qa](assets/qa.png)
 위 질문은 스트리머 침착맨이 방송에서 받은 질문과 그에 대한 대답을 스크립트로 옮긴 내용입니다. 
 
 읿반적인 챗봇에 동일한 내용을 질문하면 아래 표의 좌측과 같이 통상적인 대답을 하거나 할루시네이션 증상으로 인해 이상한 답변을 생성합니다. 
@@ -20,36 +20,39 @@
 
 |튜닝 전 응답|튜닝 후 응답| 
 |---|---|
-|![before_tuning](image/before_tuning.png)|![after_tuning](image/after_tuning.png)|
+|![before_tuning](assets/before_tuning.png)|![after_tuning](assets/after_tuning.png)|
 
 <br>
 
-### 실행 방법 
-1. 환경 만들기
+### 실행 방법 - 채팅 실행 
+1. 환경 설정 using on poetry
+
+본 레포지토리는 poetry를 이용하여 종속성 관리를 진행합니다.    
+poetry가 설치 안돼있는 분들은 설치해주시기 바랍니다. 
 ```
-conda create -n assist_bot python=3.10.9
-conda activate assist_bot
+# 필요 라이브러리 설치 
+poetry install 
+
+# 가상 환경 실행 
+poetry shell
 ```
 
-이 버전은 파이썬 3.10 버전을 필요로 합니다.    
-그 이하 버전의 파이썬 사용 시, 특정 기능에 제한이 있을 수 있습니다. 
-
-2. requirement 설치 
-
+2. ChatGPT API 키 설정 
 ```
-pip install -r requirements.txt
+export OPENAI_API_KEY=<YOUR_API_KEY>
 ```
+
 
 3. FAQ 작성 
 ```
-streamlit run qa_setting.py
+streamlit run src/ui/qa_setting.py
 ```
 최대 10개의 질문까지 설정 가능하며, 작성 후 하단의 '저장하기' 버튼을 누르면 txt 파일 형태로 저장됩니다. 
 
 
 4. 스트리머 정보 구축 
 ```
-python construct_db.py
+python src/preprocessing/construct_db.py
 ```
 
 위 코드를 실행하면 스트리머의 정보를 담은 vectore DB가 생성됩니다. 
@@ -89,6 +92,36 @@ kill $PID
 
 kill -9 $PID  //to forcefully kill the port
 ```
+<br></br>
+
+### 실행 방법 - 웹서버 실행 
+
+1. 환경 설정 using on poetry
+
+본 레포지토리는 poetry를 이용하여 종속성 관리를 진행합니다.    
+poetry가 설치 안돼있는 분들은 설치해주시기 바랍니다. 
+```
+# 필요 라이브러리 설치 
+poetry install 
+
+# 가상 환경 실행 
+poetry shell
+```
+
+2. ChatGPT API 키 설정 
+```
+export OPENAI_API_KEY=<YOUR_API_KEY>
+```
+
+3. 도커 이미지 생성 
+```
+docker build -t persona_chatbot .
+```
+
+4. 웹서버 컨테이너 실행 
+```
+docker run -d -p 80:80 persona_chatbot
+```
 
 <br>
 
@@ -101,7 +134,7 @@ kill -9 $PID  //to forcefully kill the port
 - [ ] 생성 질답 검증 기능 추가
 - [x] 데이터 증강 기능 추가(프롬프트 엔지니어링) 
 - [ ] 답변 말투 변경 
-- [ ] ~~스트리머 개인 정보 입력 페이지 추가~~
+- [x] 스트리머 개인 정보 입력 페이지 추가
 - [ ] ~~학습용 데이터 DB화~~
-- [ ] ~~추론용 API 서버 구축~~
+- [x] 추론용 API 서버 구축
 
