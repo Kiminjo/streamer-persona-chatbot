@@ -7,7 +7,7 @@ from pathlib import Path
 import warnings
 
 # Custom functions
-from preprocessing import get_txt_file, text_split, get_api_key
+from preprocessing import get_txt_file, text_split
 
 warnings.filterwarnings("ignore")
 
