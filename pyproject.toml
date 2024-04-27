@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "streamer-persona-chatbot"
+version = "0.1.0"
+description = ""
+authors = ["Kiminjo <deulseong1121@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+faiss-cpu = "^1.8.0"
+langchain = "^0.1.16"
+langchain-openai = "^0.1.4"
+pandas = "^2.2.2"
+chainlit = "^1.0.505"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
