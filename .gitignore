@@ -5,3 +5,9 @@ __pycache__/
 # chainlit files 
 .chainlit/
 chainlit.md
+
+# Notebook file 
+**/*.ipynb
+
+# json file for OAuth
+client_secrets.json
