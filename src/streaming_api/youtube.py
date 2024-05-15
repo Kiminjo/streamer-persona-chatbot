@@ -10,6 +10,17 @@ def convert_chat_format(chat: str,
                         livechatid: str,
                         display_content: bool = True
                         ):
+    """
+    Convert the chat format to the required format for the YouTube API
+
+    Parameters:
+    -----------
+    chat: str
+        The chat message
+
+    livechatid: str
+        The live chat ID
+    """
     snippet = {
         'snippet': {
             'liveChatId': livechatid,
@@ -23,13 +34,43 @@ def convert_chat_format(chat: str,
     return snippet
 
 class YouTubeAPI:
-    def __init__(self, 
-                 client_secrets_file: str, 
-                 scopes: list = ['https://www.googleapis.com/auth/youtube.force-ssl'], 
-                 api_service_name: str = 'youtube', 
-                 api_version: str = 'v3', 
+    """
+    YouTube API class
+
+    Attributes:
+    -----------
+    CLIENT_SECRETS_FILE: str
+        The client secrets file
+
+    SCOPES: list
+        The list of scopes
+
+    API_SERVICE_NAME: str
+        The API service name
+
+    API_VERSION: str
+        The API version
+
+    service: googleapiclient.discovery.Resource
+        The authenticated service
+
+    livechatid: str
+        The live chat ID
+
+    Examples:
+    ---------
+    >>> yt = YouTubeAPI('client_secret.json')
+    >>> chat, nextpagetoken = yt.get_live_chat()
+    >>> snippet = convert_chat_format(<YOUR_RESPONSE>, yt.livechatid)
+    >>> yt.send_live_chat(snippet)
+    """
+    def __init__(self,
+                 client_secrets_file: str,
+                 scopes: list = ['https://www.googleapis.com/auth/youtube.force-ssl'],
+                 api_service_name: str = 'youtube',
+                 api_version: str = 'v3',
                 ):
-        
+
         self.CLIENT_SECRETS_FILE = client_secrets_file
         self.SCOPES = scopes
         self.API_SERVICE_NAME = api_service_name
@@ -43,14 +84,40 @@ class YouTubeAPI:
 
     def _get_authenticated_service(self,
                                    port: int = 0):
-        flow = InstalledAppFlow.from_client_secrets_file(self.CLIENT_SECRETS_FILE, 
+        """
+        Get the authenticated service
+
+        Parameters:
+        -----------
+        port: int
+            The port number
+
+        Returns:
+        --------
+        service: googleapiclient.discovery.Resource
+            The authenticated service
+        """
+        flow = InstalledAppFlow.from_client_secrets_file(self.CLIENT_SECRETS_FILE,
                                                          self.SCOPES)
         credentials = flow.run_local_server(port=port)
-        return build(self.API_SERVICE_NAME, 
-                     self.API_VERSION, 
+        return build(self.API_SERVICE_NAME,
+                     self.API_VERSION,
                      credentials=credentials)
-    
+
     def _get_livechatid(self, broadcast_status: str):
+        """
+        Get the live chat ID
+
+        Parameters:
+        -----------
+        broadcast_status: str
+            The broadcast status
+
+        Returns:
+        --------
+        livechatid: str
+            The live chat ID
+        """
         list_broadcasts_request = self.service.liveBroadcasts().list(
             broadcastStatus=broadcast_status,
             part='id,snippet',
@@ -60,11 +127,30 @@ class YouTubeAPI:
         list_broadcasts_response = list_broadcasts_request.execute()
 
         return list_broadcasts_response['items'][0]['snippet']['liveChatId']
-    
+
     def get_live_chat(self,
                       part: str = 'id,snippet,authorDetails',
                       nextpagetoken: str = None
                       ):
+        """
+        Get the live chat
+
+        Parameters:
+        -----------
+        part: str
+            The part of the interesting data
+
+        nextpagetoken: str
+            The next page token
+
+        Returns:
+        --------
+        output_chat: list
+            The list of chat messages
+
+        nextpagetoken: str
+            The next page token
+        """
         if nextpagetoken:
             response = self.service.liveChatMessages().list(
                 liveChatId=self.livechatid,
@@ -84,26 +170,19 @@ class YouTubeAPI:
         for chat in response.get('items', []):
             output_chat.append(chat['snippet']['textMessageDetails']['messageText'])
         return output_chat, nextpagetoken
-    
+
     def send_live_chat(self,
                        snippet: dict
                        ):
+        """
+        Send the live chat
+
+        Parameters:
+        -----------
+        snippet: dict
+            The snippet of the chat message
+        """
         self.service.liveChatMessages().insert(
             part='snippet',
             body=snippet
         ).execute()
-        
-        
-
-if __name__=="__main__":
-    yt = YouTubeAPI('client_secret.json')
-    chat, nextpagetoken = yt.get_live_chat()
-    print(chat)
-
-    snippet = convert_chat_format('소소연 사랑해', yt.livechatid)
-    yt.send_live_chat(snippet)
-    print("here")
-
-    snippet = convert_chat_format('소소연 뻐뀨', yt.livechatid, False)
-    yt.send_live_chat(snippet)
-    print("here")
