@@ -12,3 +12,6 @@ notebook/
 
 # json file for OAuth
 client_secrets.json
+
+# Vector DB
+vector_db/
